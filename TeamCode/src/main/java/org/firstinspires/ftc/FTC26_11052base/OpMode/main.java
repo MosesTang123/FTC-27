@@ -6,12 +6,13 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 @TeleOp(name = "IDK2 Fixed")
-public class IDK2 extends OpMode {
+public class main extends OpMode {
 
     TelemetryManager panelsTelemetry = PanelsTelemetry.INSTANCE.getTelemetry();
 
 
-    idk Idk = new idk();
+
+    motorservo motorservo = new motorservo();
     motordrivetrain drive = new motordrivetrain();
 
     double target = 1;
@@ -19,17 +20,22 @@ public class IDK2 extends OpMode {
     @Override
     public void init() {
 
-        Idk.init(hardwareMap,this );
+        motorservo.init(hardwareMap,this );
         drive.init(hardwareMap,this );
     }
 
     @Override
     public void loop() {
-        Idk.a(-1,0.5,0 );
-        Idk.servo1(0.1);
-        Idk.servo2(0.4);
+        motorservo.intake(-1);
+        motorservo.shooter(0.5);
+        motorservo.servo1(0.15);
+        motorservo.servo2(0.35);
         drive.drive(-gamepad1.left_stick_y, gamepad1.left_stick_x);
+
+
+
 
     }
 
 }
+

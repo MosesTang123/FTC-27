@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.FTC26_11052base.OpMode;
 
 
+import com.pedropathing.math.MathFunctions;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
@@ -13,9 +14,9 @@ public class motordrivetrain {
 
 
     public void init(HardwareMap hw, OpMode opMode){
-        left=hw.get(DcMotorEx.class,"left");
+        left=hw.get(DcMotor.class,"left");
         left.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        right=hw.get(DcMotorEx.class,"right");
+        right=hw.get(DcMotor.class,"right");
         right.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         left.setDirection(DcMotor.Direction.FORWARD);
         right.setDirection(DcMotor.Direction.REVERSE);
@@ -27,10 +28,8 @@ public class motordrivetrain {
     double leftpower =spd+spin;
     double rightpower =spd-spin;
 
-        left.setPower(leftpower);
-        right.setPower(rightpower);
-
-
+        left.setPower(MathFunctions.clamp(leftpower,-1,1));
+        right.setPower(MathFunctions.clamp(rightpower,-1,1));
 
 
 
