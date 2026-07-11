@@ -17,18 +17,19 @@ public class motordrivetrain {
         left.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         right=hw.get(DcMotorEx.class,"right");
         right.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        left.setDirection(DcMotor.Direction.FORWARD);
+        right.setDirection(DcMotor.Direction.REVERSE);
+        left.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        right.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
     }
     public void drive (double spd, double spin){
     double leftpower =spd+spin;
     double rightpower =spd-spin;
-    double largest =Math.max(Math.abs(leftpower),Math.abs(rightpower));
-    if (largest >1.0){
-        leftpower/=largest;
-        rightpower/=largest;
+
         left.setPower(leftpower);
         right.setPower(rightpower);
-    }
+
 
 
 

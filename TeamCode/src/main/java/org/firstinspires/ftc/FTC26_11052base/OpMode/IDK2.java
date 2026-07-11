@@ -29,6 +29,7 @@ public class IDK2 extends OpMode {
         Idk.servo1(0.1);
         Idk.servo2(0.4);
         drive.drive(-gamepad1.left_stick_y, gamepad1.left_stick_x);
+
     }
 
 }
