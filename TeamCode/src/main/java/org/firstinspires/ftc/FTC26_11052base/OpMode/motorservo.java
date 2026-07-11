@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.FTC26_11052base.OpMode;
 
 
+import com.pedropathing.math.MathFunctions;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
@@ -39,7 +40,7 @@ public class motorservo {
 }
     public void shooter (double power){
         if (opMode.gamepad1.left_bumper) {
-            shooter.setPower(power);
+            shooter.setPower(MathFunctions.clamp(power,-1,1));
         }
         else {
             shooter.setPower(0);

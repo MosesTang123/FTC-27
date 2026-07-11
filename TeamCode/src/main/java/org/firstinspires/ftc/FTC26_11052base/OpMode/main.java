@@ -13,29 +13,43 @@ public class main extends OpMode {
 
 
     motorservo motorservo = new motorservo();
-    motordrivetrain drive = new motordrivetrain();
+    twomotordrivetrain drive = new twomotordrivetrain();
+    double pwr=0.5;
 
-    double target = 1;
 
     @Override
     public void init() {
 
         motorservo.init(hardwareMap,this );
-        drive.init(hardwareMap,this );
+        drive.init(hardwareMap,this);
     }
 
     @Override
-    public void loop() {
+    public void loop () {
+
         motorservo.intake(-1);
-        motorservo.shooter(0.5);
         motorservo.servo1(0.15);
         motorservo.servo2(0.35);
+
         drive.drive(-gamepad1.left_stick_y, gamepad1.left_stick_x);
 
 
 
+        if (gamepad1.dpadUpWasPressed() ) {
+            pwr += 0.1;
+        }
+        if (gamepad1.dpadDownWasPressed() ) {
+            pwr -= 0.1;
+        }
+
+        panelsTelemetry.addData("ShooterPower ",motorservo.shooter.getPower());
+        panelsTelemetry.update(telemetry);
 
     }
 
+
+
 }
+
+
 

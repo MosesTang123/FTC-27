@@ -4,11 +4,10 @@ package org.firstinspires.ftc.FTC26_11052base.OpMode;
 import com.pedropathing.math.MathFunctions;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 
-public class motordrivetrain {
+public class twomotordrivetrain {
 
     private DcMotor left ,right;
 
