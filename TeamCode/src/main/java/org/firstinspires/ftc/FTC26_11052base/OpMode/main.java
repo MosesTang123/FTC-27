@@ -11,7 +11,7 @@ public class main extends OpMode {
     TelemetryManager panelsTelemetry = PanelsTelemetry.INSTANCE.getTelemetry();
 
 
-
+    mecanum drive1 = new mecanum();
     motorservo motorservo = new motorservo();
     twomotordrivetrain drive = new twomotordrivetrain();
     double pwr=0.5;
@@ -33,7 +33,7 @@ public class main extends OpMode {
 
         drive.drive(-gamepad1.left_stick_y, gamepad1.left_stick_x);
 
-
+        drive1.drivebetter(gamepad1.left_stick_y,gamepad1.left_stick_x,gamepad1.right_stick_x);
 
         if (gamepad1.dpadUpWasPressed() ) {
             pwr += 0.1;
@@ -41,9 +41,11 @@ public class main extends OpMode {
         if (gamepad1.dpadDownWasPressed() ) {
             pwr -= 0.1;
         }
+        motorservo.shooter(pwr);
 
         panelsTelemetry.addData("ShooterPower ",motorservo.shooter.getPower());
         panelsTelemetry.update(telemetry);
+
 
     }
 

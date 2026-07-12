@@ -24,7 +24,7 @@ public class motorservo {
         shooter=hw.get(DcMotor.class,"shooter");
         shooter.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         transfer=hw.servo.get("transfer");
-       transfer.setPosition(0);
+        transfer.setPosition(0);
         blocker=hw.servo.get("blocker");
         blocker.setPosition(0);
     }
