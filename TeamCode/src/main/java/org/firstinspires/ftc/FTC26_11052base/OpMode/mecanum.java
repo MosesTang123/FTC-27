@@ -16,14 +16,15 @@ public class mecanum  {
     double lfpwr,rfpwr,lbpwr,rbpwr;
     private IMU imu;
 
+
     public void init(HardwareMap hw){
 
         Lfront=hw.get(DcMotor.class,"Lfront");
         Rfront=hw.get(DcMotor.class,"Rfront");
         Lback=hw.get(DcMotor.class,"Lback");
         Rback=hw.get(DcMotor.class,"Rback");
-        Rback.setDirection(DcMotor.Direction.REVERSE);
-        Rfront.setDirection(DcMotor.Direction.REVERSE);
+        Lback.setDirection(DcMotor.Direction.REVERSE);
+        Lfront.setDirection(DcMotor.Direction.REVERSE);
         Lfront.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         Lback.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         Rfront.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
@@ -32,18 +33,19 @@ public class mecanum  {
         Rfront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         Lback.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         Rback.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        imu = hw.get(IMU.class,"IMU");
+        imu = hw.get(IMU.class,"imu");
         RevHubOrientationOnRobot revor =new RevHubOrientationOnRobot(
-                RevHubOrientationOnRobot.LogoFacingDirection.LEFT,//TBC
-                RevHubOrientationOnRobot.UsbFacingDirection.UP//TBC
-        )
+                RevHubOrientationOnRobot.LogoFacingDirection.BACKWARD,//TBC
+
+                RevHubOrientationOnRobot.UsbFacingDirection.RIGHT//TBC
+        );
         imu.initialize(new IMU.Parameters(revor));
     }
     public void drive1 (double drive, double strafe, double turn){
 
         lfpwr=drive+turn+strafe;
-        lbpwr=drive-turn-strafe;
-        rfpwr=drive+turn-strafe;
+        lbpwr=drive+turn-strafe;
+        rfpwr=drive-turn-strafe;
         rbpwr=drive-turn+strafe;
 
         Lfront.setPower(MathFunctions.clamp(lfpwr,-1,1));
@@ -57,7 +59,10 @@ public class mecanum  {
         double theta =Math.atan2(drive,strafe);
         double r = Math.hypot(strafe,drive);
 
-        theta= AngleUnit.normalizeRadians(theta-imu.getRobotYawPitchRollAngles(AngleUnit.RADIANS));
+        double robotYaw = imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.RADIANS);
+        theta = AngleUnit.normalizeRadians(theta - robotYaw);
+
+
 
         double ndrive=r*Math.sin(theta);
         double nstrafe=r*Math.cos(theta);
