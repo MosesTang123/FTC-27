@@ -32,9 +32,11 @@ public class main extends OpMode {
     public void loop () {
 
         motorservo.intake(-1);
+
+
      //   motorservo.servo1(0.15);
        // motorservo.servo2(0.35,0.35);
-        motorservo.servo3(0.4);
+        motorservo.servo3(0.35);
 
       //  drive.drive(-gamepad1.left_stick_y, gamepad1.left_stick_x);
         drive1.drive1(-gamepad1.left_stick_y,gamepad1.left_stick_x,gamepad1.right_stick_x);

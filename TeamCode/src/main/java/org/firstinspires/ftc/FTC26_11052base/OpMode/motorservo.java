@@ -38,7 +38,7 @@ motorservo {
 
 
         blocker3.setPosition(0);
-    }\
+    }
     public void intake(double speed){
         if (opMode.gamepad1.right_bumper) {
             intake.setPower(speed);
@@ -80,10 +80,10 @@ motorservo {
 //        }
     public void servo3 ( double pos3){
          if (opMode.gamepad1.b) {
-            blocker3.setPosition(pos3);
+            blocker3.setPosition(0);
         }
         else {
-            blocker3.setPosition(0);
+            blocker3.setPosition(pos3);
         }
 
     }
