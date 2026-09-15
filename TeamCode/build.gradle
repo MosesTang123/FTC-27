@@ -16,7 +16,7 @@ apply from: '../build.common.gradle'
 apply from: '../build.dependencies.gradle'
 
 android {
-    namespace = 'org.firstinspires.ftc.FTC26_11052base'
+    namespace = 'org.firstinspires.ftc.testing'
 
     packagingOptions {
         jniLibs.useLegacyPackaging true
