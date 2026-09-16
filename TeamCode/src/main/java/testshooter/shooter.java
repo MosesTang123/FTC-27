@@ -17,19 +17,24 @@ shooter {
     private OpMode opMode;
 public void init( HardwareMap hw,OpMode opmode){
 
+    this.opMode = opmode ;
+
     shooter1=hw.get(DcMotorEx.class,"shooter");
     shooter1.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
     shooter1.setZeroPowerBehavior();
-    claw=hw.get(Servo.class,claw);
+    claw=hw.get(Servo.class,"claw");
     claw.setPosition(0);
 }
 
-public void claw{
-    if(opMode.gamepad1.left_bumper){
-    claw.setPosition(80);
-    }else{
+public void claw() {
+    if (opMode.gamepad1.left_bumper) {
+        claw.setPosition(0.4);
+    } else {
         claw.setPosition(0);
+
     }
+
+}
 public void shooter(double power){
         if (opMode.gamepad1.right_bumper){
             shooter1.setPower(MathFunctions.clamp(power,-1,1));
@@ -39,6 +44,6 @@ public void shooter(double power){
 
         }
 
-    }
+
 
 }
