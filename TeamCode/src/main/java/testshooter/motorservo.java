@@ -5,12 +5,10 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
-import com.bylazar.telemetry.PanelsTelemetry;
-import com.bylazar.telemetry.TelemetryManager;
 
 
 public class
-shooter {
+motorservo {
     public DcMotorEx shooter1;
 
     public Servo claw;
@@ -21,7 +19,7 @@ public void init( HardwareMap hw,OpMode opmode){
 
     shooter1=hw.get(DcMotorEx.class,"shooter");
     shooter1.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
-    shooter1.setZeroPowerBehavior();
+    shooter1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
     claw=hw.get(Servo.class,"claw");
     claw.setPosition(0);
 }
