@@ -30,6 +30,9 @@ public class main extends OpMode {
         power = MathFunctions.clamp(power, -1.0, 1.0);
 
         motorservo.claw();
+        motorservo.intake();
+
+        motorservo.blocker();
 
         motorservo.shooter(power);
 

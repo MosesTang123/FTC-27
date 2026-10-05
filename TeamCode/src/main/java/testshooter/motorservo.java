@@ -9,39 +9,59 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 public class
 motorservo {
-    public DcMotorEx shooter1;
+    public DcMotorEx shooter1, intake;
 
-    public Servo claw;
+    public Servo claw, blocker;
     private OpMode opMode;
-public void init( HardwareMap hw,OpMode opmode){
 
-    this.opMode = opmode ;
+    public void init(HardwareMap hw, OpMode opmode) {
 
-    shooter1=hw.get(DcMotorEx.class,"shooter");
-    shooter1.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
-    shooter1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-    claw=hw.get(Servo.class,"claw");
-    claw.setPosition(0);
-}
+        this.opMode = opmode;
 
-public void claw() {
-    if (opMode.gamepad1.left_bumper) {
-        claw.setPosition(0.4);
-    } else {
+        shooter1 = hw.get(DcMotorEx.class, "shooter");
+        shooter1.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
+        shooter1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        intake = hw.get(DcMotorEx.class, "intake");
+        intake.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
+        intake.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        claw = hw.get(Servo.class, "claw");
         claw.setPosition(0);
+        blocker = hw.get(Servo.class, "blocker");
+        blocker.setPosition(0);
+    }
+
+    public void claw() {
+        if (opMode.gamepad1.left_bumper) {
+            claw.setPosition(0.4);
+        } else {
+            claw.setPosition(0);
+
+        }
 
     }
 
-}
-public void shooter(double power){
-        if (opMode.gamepad1.right_bumper){
-            shooter1.setPower(MathFunctions.clamp(power,-1,1));
-        }else{
+    public void shooter(double power) {
+        if (opMode.gamepad1.right_bumper) {
+            shooter1.setPower(MathFunctions.clamp(power, -1, 1));
+        } else {
             shooter1.setPower(0);
         }
 
+    }
+
+    public void intake() {
+        if (opMode.gamepad1.right_bumper) {
+            intake.setPower(1);
+        }
+    }
+
+    public void blocker() {
+        if (opMode.gamepad1.a) {
+            blocker.setPosition(0.43);
+        } else {
+            blocker.setPosition(0);
         }
 
 
-
+    }
 }
